@@ -26,7 +26,7 @@ export async function load({ request, url, locals }) {
 		const iosRegex = /mac|iPhone/i; 
 		if (iosRegex.test(userAgent)) { 
 			console.log('Redirecting for iOS');
-			redirect(307, `sms:888222&body=${decrypted}`);
+			redirect(307, `sms:888222?body=${encodeURIComponent(decrypted)}`);
 		}
 		// Android or other platforms
 		else {
@@ -34,7 +34,7 @@ export async function load({ request, url, locals }) {
 			const code = url.searchParams.get('code');
 			const href = `sms:888222;?&body=${decrypted}`;
 
-			redirect(307, `sms:888222;?&body=${decrypted}`);
+			redirect(307, `sms:888222?body=${encodeURIComponent(decrypted)}`);
 		};
 
 
